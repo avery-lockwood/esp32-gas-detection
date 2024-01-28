@@ -7,20 +7,31 @@
     <title>WebSocket Client</title>
 </head>
 <body>
-    <h1>WebSocket Client</h1>
-    <div id="output"></div>
-
+    <h1>snensnr data</h1>
+    <div id="mq7_output"></div>
+    <div id="mq135_output"></div>
+    <div id="mq5_output"></div>
     <script>
-        const socket = new WebSocket("ws://localhost:8080");
-
+        //const socket = new WebSocket("ws://localhost:8080");
+        const socket = new WebSocket("ws://192.168.86.249:8080")
         socket.onopen = (event) => {
             console.log("WebSocket connection opened:", event);
         };
 
         socket.onmessage = (event) => {
-            const outputDiv = document.getElementById("output");
-            outputDiv.innerHTML = `<p>Received: ${event.data}</p>`;
-            console.log(`Received: ${message}`);
+            const mq7outputDiv = document.getElementById("mq7_output");
+            if(event.data[2] == '7'){
+            mq7outputDiv.innerHTML = `<p>Received: ${event.data}</p>`;
+            }
+            const mq135outputDiv = document.getElementById("mq135_output");
+            if(event.data[2] == '1'){
+            mq135outputDiv.innerHTML = `<p>Received: ${event.data}</p>`;
+            }
+            const mq5outputDiv = document.getElementById("mq5_output");
+            if(event.data[2] == '5'){
+            mq5outputDiv.innerHTML = `<p>Received: ${event.data}</p>`;
+            }
+           //console.log(`Received: ${event.data}`);
         };
 
         socket.onclose = (event) => {

@@ -34,10 +34,10 @@ wss.on('connection', (ws) => {
     } catch (error) {
       console.error('Error processing message:', error.message);
     }
-    
+
     wss.clients.forEach((client) => {
         if (client !== ws && client.readyState === WebSocket.OPEN) {
-          client.send(`Broadcast: ${message}`);
+          client.send(`${message}`);
         }
       });
   });

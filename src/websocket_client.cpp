@@ -96,9 +96,18 @@ void loop() {
   Serial.println(mq5_value);
   
 
-  String message = String(mq7_value);
-  if(!webSocket.sendTXT(message)){
+  String mq7_message = String("mq7_data:"+ String(mq7_value));
+  if(!webSocket.sendTXT(mq7_message)){
     Serial.println("Message did not send");
   }
+  String mq135_message = String("mq135_data:"+ String(mq135_value));
+  if(!webSocket.sendTXT(mq135_message)){
+    Serial.println("Message did not send");
+  }
+  String mq5_message = String("mq5_data:"+ String(mq5_value));
+  if(!webSocket.sendTXT(mq5_message)){
+    Serial.println("Message did not send");
+  }
+  
   delay(100);
 }
