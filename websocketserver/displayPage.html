@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Example</title>
+</head>
+<body>
+    <div id="output"></div>
+    <h1>jsdfdbksjd</h1>
+    <script>
+        const socket = new WebSocket("ws://localhost:8765");
+
+        socket.onopen = (event) => {
+            console.log("WebSocket connection opened");
+        };
+
+        socket.onmessage = (event) => {
+            const data = event.data;
+            console.log("Received data from server: ", data);
+
+            // Display the received data on the HTML page
+            const outputDiv = document.getElementById("output");
+            outputDiv.innerHTML = `<p>${data}</p>`;
+        };
+
+        socket.onclose = (event) => {
+            console.log("WebSocket connection closed");
+        };
+    </script>
+</body>
+</html>
