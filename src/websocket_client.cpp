@@ -32,6 +32,17 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
   }
 }
 
+void checkWiFiConnection() {
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.println("Lost connection. Reconnecting...");
+    WiFi.begin(ssid, password);
+    while (WiFi.status() != WL_CONNECTED) {
+      delay(1000);
+      Serial.println("Connecting to WiFi...");
+    }
+    Serial.println("Reconnected to WiFi");
+  }
+}
 
 float GetSensorData(int pin){
   float sensorValue = 0;
@@ -57,6 +68,7 @@ void setup() {
 
   //setting up pins
   Serial.begin(9600);
+  delay(100);
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
@@ -86,6 +98,7 @@ void setup() {
 }
 
 void loop() {
+  checkWiFiConnection();
   delay(300);
   webSocket.loop();
   float mq7_value = GetSensorData(mq7_pin);
