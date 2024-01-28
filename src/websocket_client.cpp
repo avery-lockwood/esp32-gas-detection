@@ -60,6 +60,15 @@ void setup() {
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
+    //turns on physical lights if sensor readings are too high regardless of internet connection
+    float mq7_value = GetSensorData(mq7_pin);
+    float mq135_value = GetSensorData(mq135_pin);
+    float mq5_value = GetSensorData(mq5_pin);
+
+    if (mq7_value > mq7_thresh){ digitalWrite(mq7_light_pin, HIGH);} else{digitalWrite(mq7_light_pin, LOW);}
+    if (mq135_value > mq135_thresh){ digitalWrite(mq135_light_pin, HIGH);} else{digitalWrite(mq135_light_pin, LOW);}
+    if (mq5_value > mq5_thresh){ digitalWrite(mq5_light_pin, HIGH);} else{digitalWrite(mq5_light_pin, LOW);}
+    //turns on physical lights if sensor readings are too high regardless of internet connection
     Serial.println("Connecting to WiFi...");
   }
   IPAddress localIP = WiFi.localIP();
@@ -108,6 +117,6 @@ void loop() {
   if(!webSocket.sendTXT(mq5_message)){
     Serial.println("Message did not send");
   }
-  
+
   delay(100);
 }
