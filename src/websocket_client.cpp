@@ -2,9 +2,9 @@
 #include <WiFi.h>
 #include <WebSocketsClient.h>
 //web vars
-const char* ssid = "Brickhouse";
-const char* password = "Nopass4us!";
-const char*  IP = "192.168.86.249";
+const char* ssid = "name";
+const char* password = "pass";
+const char*  IP = "ip";
 const int serverPort = 8080; // WebSocket server port
 //web vars
 
