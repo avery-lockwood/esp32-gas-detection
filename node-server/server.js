@@ -44,7 +44,6 @@ wss.on('connection', (ws) => {
 });
 
 async function someAsyncFunction(data) {
-  // Simulate an asynchronous operation (replace with your actual logic)
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(`Processed: ${data}`);
