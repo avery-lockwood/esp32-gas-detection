@@ -2,10 +2,10 @@
 #include <WiFi.h>
 #include <WebSocketsClient.h>
 //web vars
-const char* ssid = "Brickhouse";
-const char* password = "Nopass4us!";
-const char*  IP = "192.168.86.249";
-const int wsServerPort = 8080;
+const char* ssid = "name";
+const char* password = "pass";
+const char*  IP = "ip";
+const int serverPort = 8080; // WebSocket server port
 //web vars
 
 //vars for data collection
@@ -103,32 +103,4 @@ void loop() {
   }
 
   delay(100);
-}
-
-void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
-  if (type == WStype_TEXT) {
-    Serial.printf("Received text: %s\n", payload);
-  }
-}
-
-void checkWiFiConnection() {
-  if (WiFi.status() != WL_CONNECTED) {
-    Serial.println("Lost connection. Reconnecting...");
-    WiFi.begin(ssid, password);
-    while (WiFi.status() != WL_CONNECTED) {
-      delay(1000);
-      Serial.println("Connecting to WiFi...");
-    }
-    Serial.println("Reconnected to WiFi");
-  }
-}
-
-float GetSensorData(int pin){
-  float sensorValue = 0;
-  for (int i = 0; i < sample_size; i++)
-  {
-    sensorValue += analogRead(pin);
-  }
-  sensorValue = sensorValue / sample_size;
-  return sensorValue;
 }
